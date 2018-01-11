@@ -1,0 +1,22 @@
+<div>
+    <br/>
+    <p>
+        <b>
+            <?php if ($this->getIsGuest()): ?>
+                <?php echo sprintf(
+                    __(
+                        'We were unable to verify your age. In order to proceed with the order please follow <a href="%s">this link</a>.'
+                    ),
+                    $this->getLink()
+                ); ?>
+            <?php else: ?>
+                <?php echo sprintf(
+                    __(
+                        'We were unable to verify your age. If you submitted documents proving your age we will review it shortly and proceed with the order. If not please follow <a href="%s">this link</a> to proceed with the order.'
+                    ),
+                    $this->getLink()
+                ); ?>
+            <?php endif; ?>
+        </b>
+    </p>
+</div>

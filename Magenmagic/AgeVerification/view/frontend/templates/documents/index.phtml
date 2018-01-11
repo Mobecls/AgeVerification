@@ -1,0 +1,24 @@
+<form method="POST" enctype="multipart/form-data"
+      action="<?php echo $this->getUrl('age-verification/documents/post'); ?>"
+      data-hasrequired="<?php echo __('* Required Fields') ?>" data-mage-init='{"validation":{}}'>
+
+    <fieldset class="fieldset">
+        <div class="field name required">
+            <label class="label" for="document"><span><?php echo __('Upload your document') ?></span></label>
+            <div class="control">
+                <input name="document" id="document" value="" class="input-text" type="file"
+                       data-validate="{required:true}"/>
+            </div>
+        </div>
+
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="submit" title="<?php echo __('Submit') ?>" class="action submit primary">
+                    <span><?php echo __('Submit') ?></span>
+                </button>
+            </div>
+        </div>
+    </fieldset>
+
+    <input type="hidden" name="verification_id" value="<?php echo $this->escapeHtml($this->getVerificationId()) ?>" />
+</form>

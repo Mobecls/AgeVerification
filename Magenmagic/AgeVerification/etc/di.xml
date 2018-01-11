@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magenmagic\AgeVerification\Helper\Data">
+        <arguments>
+            <argument name="encryptor" xsi:type="object">Magento\Framework\Encryption\EncryptorInterface</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="mm_age_is_verified" xsi:type="string">sales_order.mm_age_is_verified</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento\Quote\Observer\Webapi\SubmitObserver">
+        <arguments>
+            <argument name="orderSender" xsi:type="object">Magenmagic\AgeVerification\Model\Sales\Order\Email\Sender\OrderSender</argument>
+        </arguments>
+    </virtualType>
+</config>

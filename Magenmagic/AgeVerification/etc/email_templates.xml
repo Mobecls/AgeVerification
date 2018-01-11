@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="magenmagic_age_verification_request" label="Age Verification Request" file="request.html" type="html" module="Magenmagic_AgeVerification" area="frontend"/>
+    <template id="magenmagic_age_verification_email_template_order_not_verified" label="Guest Order Email Template - age not verified" file="mm_order_new_guest_age.html" type="html" module="Magenmagic_AgeVerification" area="frontend"/>
+    <template id="magenmagic_age_verification_email_template_order_not_verified_customer" label="Customer Order Email Template - age not verified" file="mm_order_new_customer_age.html" type="html" module="Magenmagic_AgeVerification" area="frontend"/>
+</config>

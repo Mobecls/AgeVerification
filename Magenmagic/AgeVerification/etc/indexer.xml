@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="customer_grid">
+        <!-- Due to known bug, it is not possible for now to add custom attribute to grid https://github.com/magento/magento2/issues/10838 -->
+        <!--<fieldset name="customer">-->
+            <!--<field name="mm_age_is_verified" xsi:type="filterable" dataType="int"/>-->
+        <!--</fieldset>-->
+    </indexer>
+</config>

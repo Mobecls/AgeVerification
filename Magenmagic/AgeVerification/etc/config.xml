@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magenmagic_age_verification>
+            <general>
+                <enabled>0</enabled>
+            </general>
+
+            <frontend>
+                <tag_verified>age is verified</tag_verified>
+                <tag_not_verified>age is not verified</tag_not_verified>
+            </frontend>
+
+            <email>
+                <template_order_not_verified>magenmagic_age_verification_email_template_order_not_verified</template_order_not_verified>
+                <template_order_not_verified_customer>magenmagic_age_verification_email_template_order_not_verified_customer</template_order_not_verified_customer>
+            </email>
+        </magenmagic_age_verification>
+    </default>
+</config>

@@ -1,0 +1,10 @@
+<!--@subject New Age Verification Request@-->
+<!--@vars {
+"var data.customer_id":"Customer ID",
+"var data.document_url":"Document URL",
+} @-->
+
+{{trans "Customer (ID: %customer_id) submitted documents for age verification" name=$data.customer_id}}
+{{trans "Document URL: %document_url" email=$data.document_url}}
+
+{{trans "Once verified, please open the customer in Admin panel, set attribute 'Age Is Verified' to 'Yes'" and proceed with Invoice}}
