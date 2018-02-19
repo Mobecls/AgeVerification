@@ -156,8 +156,7 @@ class EVSRequest
             ->setZipCode($addresses[0]->getPostcode())
             ->setState($addresses[0]->getRegion()->getRegion())
             ->setStreet(implode(' ', $addresses[0]->getStreet()))
-            //->setDateOfBirth($customer->getDob());
-            ->setDateOfBirth('1992-07-25');
+            ->setDateOfBirth($customer->getDob());
     }
 
     /**
