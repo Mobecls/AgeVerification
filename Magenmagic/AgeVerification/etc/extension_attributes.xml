@@ -7,10 +7,12 @@
     <extension_attributes for="Magento\Sales\Api\Data\OrderInterface">
         <attribute code="mm_age_is_verified" type="string"/>
         <attribute code="mm_age_verification_doc" type="string"/>
+        <attribute code="mm_age_verification_id" type="string"/>
     </extension_attributes>
 
     <extension_attributes for="Magento\Customer\Api\Data\CustomerInterface">
         <attribute code="mm_age_is_verified" type="string"/>
         <attribute code="mm_age_verification_doc" type="string"/>
+        <attribute code="mm_age_verification_id" type="string"/>
     </extension_attributes>
 </config>

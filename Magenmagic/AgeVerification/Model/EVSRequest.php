@@ -117,6 +117,7 @@ class EVSRequest
 
             $responseCode = \Zend_Http_Response::extractCode($response);
 
+
             if ($responseCode !== 200) {
                 throw new \Exception(sprintf('Error code %d returned', $responseCode));
             }
@@ -124,7 +125,11 @@ class EVSRequest
             $response = preg_split('/^\r?$/m', $response, 2);
             $response = trim($response[1]);
 
-            return in_array($this->getCode($response), $this->validCodes);
+            if (in_array($this->getCode($response), $this->validCodes)) {
+                return $this->getTransactionId($response);
+            }
+
+            return false;
         } catch (\Exception $e) {
             $this->logger->alert(
                 sprintf('Magenmagic_AgeVerification:%s:', $e->getMessage())
@@ -157,6 +162,7 @@ class EVSRequest
             ->setState($addresses[0]->getRegion()->getRegion())
             ->setStreet(implode(' ', $addresses[0]->getStreet()))
             ->setDateOfBirth($customer->getDob());
+            //->setDateOfBirth('1992-07-25');
     }
 
     /**
@@ -183,6 +189,7 @@ class EVSRequest
             '<State>' . $this->identity->getState() . '</State>' .
             '<ZipCode>' . $this->identity->getZipCode() . '</ZipCode>' .
             '<DateOfBirth>' . $this->identity->getDateOfBirth() . '</DateOfBirth>' .
+            //'<DateOfBirth>1992-07-25</DateOfBirth>' .
             '<EmailAddress>' . $this->identity->getEmail() . '</EmailAddress>' .
             '<IpAddress>' . $this->remoteAddress->getIpAddress() . '</IpAddress>' .
             '</Identity>' .
@@ -230,6 +237,25 @@ class EVSRequest
                 $error = $xml->TransactionDetails->Errors[0]->Error->attributes();
 
                 throw new \Exception((int)$error['code'] . ':' . (string)$error['message']);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $response
+     *
+     * @return int
+     * @throws \Exception
+     */
+    protected function getTransactionId($response)
+    {
+        if ($response) {
+            $xml = simplexml_load_string($response);
+
+            if (!empty($xml->TransactionDetails->TransactionId)) {
+                return (int)$xml->TransactionDetails->TransactionId;
             }
         }
 

@@ -65,7 +65,7 @@ class DocumentLink extends Template
     {
         return
             $this->isEnabled()
-                ? $this->getIsVerifiedHTML() . $this->getLinkHtml()
+                ? $this->getIsVerifiedHtml() . $this->getRefIdHtml() . $this->getLinkHtml()
                 : '';
     }
 
@@ -89,21 +89,29 @@ class DocumentLink extends Template
             $viewLabel = __('View');
             $viewLabel = "<a target=\"_blank\" href=\"$link\">$viewLabel</a>";
         } else {
-            $viewLabel = __('Pending');
+            $viewLabel = __('Pending or N/A');
         }
 
-        return $this->_renderItem($label, $viewLabel);
+        return $this->renderItem($label, $viewLabel);
     }
 
     /**
      * @return string
      */
-    protected function getIsVerifiedHTML()
+    protected function getIsVerifiedHtml()
     {
         $label = __('Age Was Verified');
         $value = __($this->getEntity()->getMmAgeIsVerified() ? 'Yes' : 'No');
 
-        return $this->_renderItem($label, $value);
+        return $this->renderItem($label, $value);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getRefIdHtml()
+    {
+        return $this->renderItem(__('Verification ID'), $this->getEntity()->getMmAgeVerificationId() ?: 'N/A');
     }
 
     /**
@@ -112,7 +120,7 @@ class DocumentLink extends Template
      *
      * @return string
      */
-    protected function _renderItem($label, $value)
+    protected function renderItem($label, $value)
     {
         return <<<HTML
    <tr>

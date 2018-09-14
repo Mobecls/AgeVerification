@@ -126,6 +126,9 @@ class OrderStrategy implements StrategyInterface
             $customer = $this->customerRepository->getById($this->order->getCustomerId());
             $customer->setCustomAttribute(Data::ATTRIBUTE_CODE_DOCUMENT_LINK, $fileName);
             $this->customerRepository->save($customer);
+        } else {
+            //conditionally create customer
+            // send welcome email with password
         }
     }
 }

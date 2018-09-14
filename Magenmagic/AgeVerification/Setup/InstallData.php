@@ -94,6 +94,21 @@ class InstallData implements InstallDataInterface
             ]
         );
 
+        $customerSetup->addAttribute(
+            Customer::ENTITY,
+            Data::ATTRIBUTE_CODE_ID,
+            [
+                'label'    => 'Age Verification ID',
+                'type'     => Table::TYPE_TEXT,
+                'position' => 150,
+                'visible'  => false,
+                'required' => false,
+                'system'   => false,
+                'length'   => 255,
+                //'is_used_in_grid' => true,
+            ]
+        );
+
         $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, Data::ATTRIBUTE_CODE_VERIFIED)
             ->setData('used_in_forms', ['adminhtml_customer'])
             ->save();
@@ -126,6 +141,20 @@ class InstallData implements InstallDataInterface
             Data::ATTRIBUTE_CODE_DOCUMENT_LINK,
             [
                 'label'    => 'Age Verification Document',
+                'visible'  => false,
+                'default'  => '',
+                'required' => false,
+                'type'     => Table::TYPE_TEXT,
+                'grid'     => true,
+                'length'   => 255,
+            ]
+        );
+
+        $salesSetup->addAttribute(
+            'order',
+            Data::ATTRIBUTE_CODE_ID,
+            [
+                'label'    => 'Age Verification ID',
                 'visible'  => false,
                 'default'  => '',
                 'required' => false,

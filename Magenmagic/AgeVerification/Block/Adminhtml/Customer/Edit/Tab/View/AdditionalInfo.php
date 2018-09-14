@@ -21,7 +21,7 @@ class AdditionalInfo extends DocumentLink
             $customerData = $this->_backendSession->getCustomerData();
             if ($data = array_intersect_key(
                 $customerData['account'],
-                array_flip(array('mm_age_is_verified', 'mm_age_verification_doc', 'store_id'))
+                array_flip(array('mm_age_is_verified', 'mm_age_verification_doc', 'mm_age_verification_id', 'store_id'))
             )) {
                 $this->customer = new DataObject($data);
             }

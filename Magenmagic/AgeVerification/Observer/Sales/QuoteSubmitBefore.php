@@ -74,13 +74,17 @@ class QuoteSubmitBefore implements ObserverInterface
         // Do not validate if disabled or logged in
         if (!$this->helper->isEnabled() || $customer->getId()) {
             if ($customer->getId()) {
-                $verifiedAttribute = $customer->getCustomAttribute('mm_age_is_verified');
-                $verified          = $verifiedAttribute ? $verifiedAttribute->getValue() : false;
+                $verifiedAttribute   = $customer->getCustomAttribute('mm_age_is_verified');
+                $verifiedIdAttribute = $customer->getCustomAttribute('mm_age_verification_id');
+                $verified            = $verifiedAttribute ? $verifiedAttribute->getValue() : false;
+                $verifiedId          = $verifiedIdAttribute ? $verifiedIdAttribute->getValue() : false;
 
                 if ($ext = $order->getExtensionAttributes()) {
                     $ext->setMmAgeIsVerified($verified);
+                    $ext->setMmAgeVerificationId($verifiedId);
                 }
                 $order->setMmAgeIsVerified($verified);
+                $order->setMmAgeVerificationId($verifiedId);
             }
 
             return;
@@ -97,10 +101,14 @@ class QuoteSubmitBefore implements ObserverInterface
             ->createRequest();
 
         $verified = $this->evsRequest->validate($request);
-        $quote->setData(Data::ATTRIBUTE_CODE_VERIFIED, $verified);
-        $observer->getOrder()->setData(Data::ATTRIBUTE_CODE_VERIFIED, $verified);
+        $quote->setData(Data::ATTRIBUTE_CODE_VERIFIED, (bool)$verified);
+        $quote->setData(Data::ATTRIBUTE_CODE_ID, $verified);
+        $observer->getOrder()->setData(Data::ATTRIBUTE_CODE_VERIFIED, (bool)$verified);
+        $observer->getOrder()->setData(Data::ATTRIBUTE_CODE_ID, $verified);
 
-        $order->getExtensionAttributes()->setMmAgeIsVerified($verified);
-        $order->setMmAgeIsVerified($verified);
+        $order->getExtensionAttributes()->setMmAgeIsVerified((bool)$verified);
+        $order->getExtensionAttributes()->setMmAgeVerificationId($verified);
+        $order->setMmAgeIsVerified((bool)$verified);
+        $order->setMmAgeVerificationId($verified);
     }
 }

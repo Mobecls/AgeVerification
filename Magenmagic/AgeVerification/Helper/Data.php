@@ -78,6 +78,11 @@ class Data extends AbstractHelper
     const ATTRIBUTE_CODE_DOCUMENT_LINK = 'mm_age_verification_doc';
 
     /**
+     * Customer EAV attribute for verification doc link
+     */
+    const ATTRIBUTE_CODE_ID = 'mm_age_verification_id';
+
+    /**
      * Address column
      */
     const ATTRIBUTE_CODE_DOB = 'mm_dob';

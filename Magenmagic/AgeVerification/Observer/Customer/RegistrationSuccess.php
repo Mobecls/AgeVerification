@@ -51,6 +51,7 @@ class RegistrationSuccess implements ObserverInterface
         Data $helper,
         CustomerRequestFactory $customerRequestFactory
     ) {
+
         $this->evsRequest             = $evsRequest;
         $this->customerRepository     = $customerRepositoryInterface;
         $this->helper                 = $helper;
@@ -72,7 +73,11 @@ class RegistrationSuccess implements ObserverInterface
         $request = $this->customerRequestFactory->create(['customer' => $customer])
             ->createRequest();
 
-        $customer->setCustomAttribute(Data::ATTRIBUTE_CODE_VERIFIED, $this->evsRequest->validate($request));
+        $customer->setCustomAttribute(
+            Data::ATTRIBUTE_CODE_VERIFIED,
+            (bool)($verificationId = $this->evsRequest->validate($request))
+        );
+        $customer->setCustomAttribute(Data::ATTRIBUTE_CODE_ID, $verificationId);
         $this->customerRepository->save($customer);
     }
 }

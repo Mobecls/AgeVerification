@@ -125,6 +125,10 @@ class Post extends AbstractAccount
                 $validationResult = $this->evsRequest->validate($request);
                 $currentCustomerDataObject->setCustomAttribute(
                     Data::ATTRIBUTE_CODE_VERIFIED,
+                    (bool)$validationResult
+                );
+                $currentCustomerDataObject->setCustomAttribute(
+                    Data::ATTRIBUTE_CODE_ID,
                     $validationResult
                 );
                 $this->customerRepository->save($currentCustomerDataObject);
